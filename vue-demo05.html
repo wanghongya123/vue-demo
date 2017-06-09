@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <table>
+      <thead>
+        <tr>
+          <th>书名</th>
+          <th>价钱</th>
+          <th>数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in book">
+          <th>{{item.name}}</th>
+          <th>{{item.price}}</th>
+          <th><input type="number" v-model.number="item.num"></th>
+        </tr>
+      </tbody>
+    </table>
+    <h1>总价为：{{totalMoney}} 元</h1>
+    <h1>总价为：{{ total() }} 元</h1>
+  </div>
+  <script src="./vue.js"></script>
+<script>
+  var vm = new Vue({
+    el:"#app",
+    data:{
+      book:[
+        {name:"node.js",price:5,num:3},
+        {name:"react.js",price:6,num:2},
+        {name:"vue.js",price:8,num:3},
+        {name:"jq.js",price:1,num:6}
+      ]
+    },
+    computed:{
+      totalMoney:function(){
+        let total = 0;
+        this.book.forEach(item=>total+=item.price*item.num)
+        return total
+      }
+    },
+    methods:{
+      total(){
+        let total = 0;
+        this.book.forEach(item=>total+=item.price*item.num)
+        return total
+      }
+    }
+  })
+</script>
+</body>
+</html>
